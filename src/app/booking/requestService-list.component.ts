@@ -53,7 +53,6 @@ import { BaseService } from '../utils/services/base.service';
 })
 
 export class RequestServiceListComponent implements OnInit {
-	//dataSource: [];
 	dataSource: MatTableDataSource<any>;
 	displayedColumns: string[] = ['bookingId', 'bookingFields.firstName', 'bookingTime', 'locationId.streetAddress', 'bookingPrice'];
 	isOpenSearchPanel = false;
@@ -68,7 +67,6 @@ export class RequestServiceListComponent implements OnInit {
 	constructor(
 		private router: Router,
 		private activatedRoute: ActivatedRoute,
-		//private requestServiceService: RequestServiceService,
 		public tableService: TableService<any>,
 		private notificationService: NotificationService,
 		private http: HttpClient
@@ -89,11 +87,10 @@ export class RequestServiceListComponent implements OnInit {
 
 	list(event?: PageEvent) {
         this.makeCall().subscribe( response => {
-			//this.dataSource = response;
+			// convertimos de string a Json para poder tomar los datos
 			for (const r of response) {
 				r.bookingFields = JSON.parse(r.bookingFields);
-			  }
-			  console.log(response[0].bookingFields.firstName);
+			}
 			this.dataSource = new MatTableDataSource<any>(response);
 			this.tableService.selection.clear(); 
 		}, err =>{
@@ -102,18 +99,7 @@ export class RequestServiceListComponent implements OnInit {
 			console.log(err)
 		});
 	}
-
-	search() {
-		this.isOpenSearchPanel = false;
-		this.tableService.pager.pageIndex = 0;
-		this.tableService.filter = new RequestServiceFilter(this.filter);
-		this.list();
-	}
-
-	compareFn(c1: any, c2: any): boolean { console.log()
-		return c1 && c2 ? c1.id === c2.id : c1 === c2;
-	}
-
+	// servicio que busca el listado
 	makeCall(): Observable<any> {
 		return this.http.get(RequestServiceListComponent.BASE_URL, {headers: this.headers})
 			.pipe(catchError(BaseService.handleError));

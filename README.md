@@ -31,3 +31,6 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 Angular CLI: 7.3.1
 Node: 10.0.0
 Angular: 7.2.5
+
+## Funcionamiento
+- Una vez hayas podido montar el ambiente necesario para ejecutar la app, solo tienes que ingresar usuario y clave para acceder al dashboard de la misma. Una vez alli selecciona del menu la unica opcion existente "Generar Listado", es lo que hara sera cargar un listado de datos del usuario :  contacto@tuten.cl.
