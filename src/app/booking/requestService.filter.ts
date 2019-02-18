@@ -1,23 +1,23 @@
 import { HttpParams } from '@angular/common/http';
 
 export class RequestServiceFilter {
-	dtype: string;
-	id: number;
+	bookingPrice: number;
+	bookingId: number;
 	
 
 	constructor(filter?: RequestServiceFilter) {
 		if (filter) {
-			this.dtype = filter.dtype;
-			this.id = filter.id;
+			this.bookingPrice = filter.bookingPrice;
+			this.bookingId = filter.bookingId;
 		}
 	}
 
 	getHttpParams(httpParams = new HttpParams()): HttpParams {
-		if (this.dtype) {
-			httpParams = httpParams.set('dtype', this.dtype);
+		if (this.bookingPrice) {
+			httpParams = httpParams.set('bookingPrice', this.bookingPrice.toString());
 		}
-		if (this.id) {
-			httpParams = httpParams.set('id', this.id.toString());
+		if (this.bookingId) {
+			httpParams = httpParams.set('bookingId', this.bookingId.toString());
 		}
 		return httpParams;
 	}
